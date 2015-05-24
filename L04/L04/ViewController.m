@@ -24,7 +24,8 @@
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tabBarItem.title = @"nihao";
+    
+    self.navigationController.tabBarItem.title = @"学生";
 
     //编译navigationItem右边的按钮
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"学生"
@@ -63,6 +64,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    //显示tabbaritem栏目
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)showInfo {
@@ -128,8 +131,6 @@
     Student *selectedStudent = self.studentsArray[indexPath.row];
     
     detailViewController.student = selectedStudent;
-    
-    
     
     [self.navigationController pushViewController:detailViewController animated:YES];
 

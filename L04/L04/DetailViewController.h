@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @class Student;
 @interface DetailViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
-@property(nonatomic, strong)Student *student;
+@property(nonatomic, weak)Student *student;
+
 @end

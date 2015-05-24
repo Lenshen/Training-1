@@ -11,7 +11,7 @@
                 <outlet property="dateLabel" destination="P4C-ti-mov" id="3Fs-yd-qpK"/>
                 <outlet property="idLabel" destination="udE-CY-VKU" id="hi8-pF-7Lw"/>
                 <outlet property="image" destination="cmn-Vt-6UJ" id="H5R-U8-L6G"/>
-                <outlet property="nameLabel" destination="iHe-xy-7fz" id="KgS-Yd-wXC"/>
+                <outlet property="nameLabel" destination="iHe-xy-7fz" id="319-qx-Ncy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

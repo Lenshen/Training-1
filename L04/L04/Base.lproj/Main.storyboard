@@ -22,6 +22,7 @@
         <!--Item 2-->
         <scene sceneID="kmk-iA-Ag8">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1M1-hO-EKd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="yeU-bD-7SK" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JZj-o6-4ir">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -30,7 +31,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="rDJ-wb-FoK"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1M1-hO-EKd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1035" y="-121"/>
         </scene>
