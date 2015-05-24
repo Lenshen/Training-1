@@ -22,6 +22,17 @@
 
 @implementation DetailViewController
 
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    //将detailview中的navigationItem.title设置成学生的姓名
+    self.navigationItem.title = _student.name;
+    
+//    self.student.age = @"100";
+//    self.student.studentId = @"111111";
+//    self.student.studentClass = @"六年级";
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -43,8 +54,14 @@
     [self.dateLabel sizeToFit];
     
     self.image.image = student.image;
-    
-
+    NSLog(@"欢迎进入viewWillAppear环节");
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    NSLog(@"欢迎再次光临");
+}
+
 
 @end

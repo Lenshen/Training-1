@@ -20,12 +20,26 @@
 @end
 
 @implementation ViewController
-
+//www
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-//    CGRect frame = self.view.bounds;
+    self.tabBarItem.title = @"nihao";
+
+    //编译navigationItem右边的按钮
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"学生"
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(showInfo)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    //编译navigationItem左边的按钮
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
+                                                                                   target:self
+                                                                                   action:nil ];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+    //编译navigationItem中间title的信息
+    self.navigationItem.title = @"学生信息";
+    
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_tableView];
@@ -43,7 +57,16 @@
     [self.tableView registerNib:nib forCellReuseIdentifier:@"StudentCell"];
 
     //[self.tableView registerClass:[StudentCell class] forCellReuseIdentifier:@"StudentCell"];
+    NSLog(@"有什么需要服务的吗");
+}
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)showInfo {
+    NSLog(@"你好");
 }
 
 #pragma mark - Getter
@@ -105,6 +128,8 @@
     Student *selectedStudent = self.studentsArray[indexPath.row];
     
     detailViewController.student = selectedStudent;
+    
+    
     
     [self.navigationController pushViewController:detailViewController animated:YES];
 
