@@ -10,12 +10,14 @@
 #import "Student.h"
 #import "StudentCell.h"
 #import "DetailViewController.h"
+#import "AFNetworking.h"
 //ssssss
 //test2
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *studentsArray;
+@property (strong, nonatomic) NSArray *jsonArray;
 
 @end
 
@@ -59,6 +61,25 @@
 
     //[self.tableView registerClass:[StudentCell class] forCellReuseIdentifier:@"StudentCell"];
     NSLog(@"有什么需要服务的吗");
+    
+    
+    [self loadReivews];
+}
+
+
+- (void)loadReivews {
+    self.jsonArray = [[NSArray alloc] init];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *URL = @"http://api.staging.kangyu.co/v2/hospitals/206/reviews";
+    
+    [manager GET:URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (responseObject) {
+            self.jsonArray = responseObject;
+        }
+        [self.tableView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -93,7 +114,7 @@
 
 #pragma mark - Tableview delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.studentsArray count];
+    return self.jsonArray.count;//[self.studentsArray count];
 }
 
 
@@ -124,6 +145,10 @@
     [cell.timeLabel sizeToFit];
     
     
+    
+    // EX
+    NSDictionary *dict = self.jsonArray[indexPath.row];
+    cell.nameLabel.text = dict[@"note"];
     return cell;
 }
 
