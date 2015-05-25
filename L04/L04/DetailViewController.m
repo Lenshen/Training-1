@@ -26,12 +26,10 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    
     //将detailview中的navigationItem.title设置成学生的姓名
     self.navigationItem.title = _student.name;
     
-//    self.student.age = @"100";
-//    self.student.studentId = @"111111";
-//    self.student.studentClass = @"六年级";
     //显示navigationitem栏目
     self.navigationController.navigationBarHidden = NO;
     //隐藏tabbaritem栏目

@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"编辑";
+    self.navigationItem.title = @"编辑学生信息";
     
     Student *student = self.student;
     self.nameField.text = student.name;
