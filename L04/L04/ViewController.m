@@ -12,10 +12,14 @@
 #import "DetailViewController.h"
 #import "AFNetworking.h"
 
+
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *studentsArray;
+
 @property (nonatomic, strong) NSArray *jsonArray;
+
+
 
 @end
 
@@ -59,14 +63,16 @@
 
     //[self.tableView registerClass:[StudentCell class] forCellReuseIdentifier:@"StudentCell"];
     NSLog(@"有什么需要服务的吗");
-    [self loadReviews];
+
+    [self loadReivews];
 }
 
--(void)loadReviews{
+- (void)loadReivews {
+
     self.jsonArray = [[NSArray alloc] init];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *URL = @"http://api.staging.kangyu.co/v2/hospitals/206/reviews";
-    
+
     [manager GET:URL
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -113,6 +119,7 @@
 #pragma mark - Tableview delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.jsonArray count];
+
 }
 
 
@@ -141,9 +148,13 @@
 ////  cell.timeLabel.text = [[NSDate date] descriptionWithLocale:[NSLocale currentLocale]];
 //    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[NSDate date]];// stringWithFormat
 //    [cell.timeLabel sizeToFit];
+    
     NSDictionary *dict = self.jsonArray[indexPath.row];
     cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"note"]];
     [cell.nameLabel sizeToFit];
+
+    cell.idLabel.text = [NSString stringWithFormat:@"%@",dict[@"id"]];
+    [cell.idLabel sizeToFit];
     
     return cell;
 }

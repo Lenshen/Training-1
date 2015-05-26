@@ -69,6 +69,9 @@
     self.nameLabel.text = [NSString stringWithFormat:@"%@",dit[@"note"]];
     [self.nameLabel sizeToFit];
     
+    self.idLabel.text = [NSString stringWithFormat:@"%@",dit[@"id"]];
+    [self.idLabel sizeToFit];
+    
     NSLog(@"欢迎进入viewWillAppear环节");
 }
 
