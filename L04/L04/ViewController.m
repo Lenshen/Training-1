@@ -10,12 +10,12 @@
 #import "Student.h"
 #import "StudentCell.h"
 #import "DetailViewController.h"
-//ssssss
-//test2
+#import "AFNetworking.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *studentsArray;
+@property (nonatomic, strong) NSArray *jsonArray;
 
 @end
 
@@ -59,6 +59,25 @@
 
     //[self.tableView registerClass:[StudentCell class] forCellReuseIdentifier:@"StudentCell"];
     NSLog(@"有什么需要服务的吗");
+    [self loadReviews];
+}
+
+-(void)loadReviews{
+    self.jsonArray = [[NSArray alloc] init];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *URL = @"http://api.staging.kangyu.co/v2/hospitals/206/reviews";
+    
+    [manager GET:URL
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             if (responseObject) {
+                 self.jsonArray = responseObject;
+             }
+             [self.tableView reloadData];
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+         }];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -93,7 +112,7 @@
 
 #pragma mark - Tableview delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.studentsArray count];
+    return [self.jsonArray count];
 }
 
 
@@ -101,28 +120,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudentCell" forIndexPath:indexPath];
-    Student *student = self.studentsArray[indexPath.row];
-    
-    // 自定义cell 信息
-    //设置name
-    cell.nameLabel.text = student.name;
+//    Student *student = self.studentsArray[indexPath.row];
+//    
+//    // 自定义cell 信息
+//    //设置name
+//    cell.nameLabel.text = student.name;
+//    [cell.nameLabel sizeToFit];
+//    //设置age
+//    cell.ageLabel.text = student.age;
+//    [cell.ageLabel sizeToFit];
+//    //设置ID
+//    cell.idLabel.text = student.studentId;
+//    [cell.idLabel sizeToFit];
+//    //设置class
+//    cell.classLabel.text = student.studentClass;
+//    [cell.classLabel sizeToFit];
+//     //设置图片
+//    cell.mugshotImageVIew.image = student.image;
+//    //设置时间
+////  cell.timeLabel.text = [[NSDate date] descriptionWithLocale:[NSLocale currentLocale]];
+//    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[NSDate date]];// stringWithFormat
+//    [cell.timeLabel sizeToFit];
+    NSDictionary *dict = self.jsonArray[indexPath.row];
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@",dict[@"note"]];
     [cell.nameLabel sizeToFit];
-    //设置age
-    cell.ageLabel.text = student.age;
-    [cell.ageLabel sizeToFit];
-    //设置ID
-    cell.idLabel.text = student.studentId;
-    [cell.idLabel sizeToFit];
-    //设置class
-    cell.classLabel.text = student.studentClass;
-    [cell.classLabel sizeToFit];
-     //设置图片
-    cell.mugshotImageVIew.image = student.image;
-    //设置时间
-//  cell.timeLabel.text = [[NSDate date] descriptionWithLocale:[NSLocale currentLocale]];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[NSDate date]];// stringWithFormat
-    [cell.timeLabel sizeToFit];
-    
     
     return cell;
 }
@@ -130,9 +151,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
     
-    Student *selectedStudent = self.studentsArray[indexPath.row];
+    NSDictionary *selectedStudent = self.jsonArray[indexPath.row];
     
-    detailViewController.student = selectedStudent;
+    detailViewController.dict = selectedStudent;
     
     [self.navigationController pushViewController:detailViewController animated:YES];
 

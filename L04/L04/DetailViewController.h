@@ -11,6 +11,7 @@
 @interface DetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
-@property(nonatomic, weak)Student *student;
+@property(nonatomic, strong)Student *student;
 
+@property(nonatomic, strong)NSDictionary *dict;
 @end
