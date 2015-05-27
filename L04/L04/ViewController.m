@@ -71,19 +71,28 @@
 
     self.jsonArray = [[NSArray alloc] init];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *URL = @"http://api.staging.kangyu.co/v2/hospitals/206/reviews";
+//    NSString *URL = @"http://api.staging.kangyu.co/v2/hospitals/206/reviews";
+//
+//    [manager GET:URL
+//      parameters:nil
+//         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//             if (responseObject) {
+//                 self.jsonArray = responseObject;
+//             }
+//             [self.tableView reloadData];
+//         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//             
+//         }];
 
-    [manager GET:URL
-      parameters:nil
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             if (responseObject) {
-                 self.jsonArray = responseObject;
-             }
-             [self.tableView reloadData];
-         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             
-         }];
-
+    NSDictionary *parameter = @{@"query":
+                                     @{@"type":@"HospitalReview", @"user_id":@"8787"}};
+    NSString *postURL = @"http://api.kangyu.co/v2/search";
+    
+    [manager POST:postURL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
